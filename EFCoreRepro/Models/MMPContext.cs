@@ -27,7 +27,7 @@ namespace EFCoreRepro.Models
             {
                 entity.ToTable("Child");
 
-                entity.HasKey(e => e.ChildId);
+                entity.HasKey(e => e.ChildId); // Changing to  entity.HasKey(e => e.Id); works
 
                 entity.HasIndex(e => e.ChildId, "AK_Child_ChildId")
                     .IsUnique();
