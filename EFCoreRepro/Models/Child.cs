@@ -7,9 +7,8 @@ namespace EFCoreRepro.Models
 {
     public partial class Child
     {
-        public long? Id { get; set; }
+        public Guid Id { get; set; }
         public Guid? ParentId { get; set; }
-        public Guid ChildId { get; set; }
 
         public virtual Parent Parent { get; set; }
     }

@@ -12,9 +12,8 @@ namespace EFCoreRepro.Models
             Children = new HashSet<Child>();
         }
 
-        public long? Id { get; set; }
-        public Guid ParentId { get; set; }
-
+        public Guid Id { get; set; }
+        
         public virtual ICollection<Child> Children { get; set; } = new List<Child>();
     }
 }

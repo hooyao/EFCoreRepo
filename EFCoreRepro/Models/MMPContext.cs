@@ -27,17 +27,16 @@ namespace EFCoreRepro.Models
             {
                 entity.ToTable("Child");
 
-                entity.HasKey(e => e.ChildId); // Changing to  entity.HasKey(e => e.Id); works
+                entity.HasKey(e => e.Id); // Changing to  entity.HasKey(e => e.Id); works
 
-                entity.HasIndex(e => e.ChildId, "AK_Child_ChildId")
+                entity.HasIndex(e => e.Id, "AK_Child_ChildId")
                     .IsUnique();
-
-                entity.Property(e => e.ChildId).HasDefaultValueSql("(newid())");
-                entity.Property(e => e.Id).HasColumnName("Id").ValueGeneratedOnAdd();
+                
+                entity.Property(e => e.Id).HasColumnName("ChildId").HasDefaultValueSql("(newid())");
 
                 entity.HasOne(d => d.Parent)
                     .WithMany(p => p.Children)
-                    .HasPrincipalKey(p => p.ParentId)
+                    .HasPrincipalKey(p => p.Id)
                     .HasForeignKey(d => d.ParentId)
                     .HasConstraintName("FK_Child_ParentId");
             });
@@ -46,13 +45,12 @@ namespace EFCoreRepro.Models
             {
                 entity.ToTable("Parent");
                 
-                entity.HasKey(e => e.ParentId);
+                entity.HasKey(e => e.Id);
 
-                entity.HasIndex(e => e.ParentId, "AK_Parent_ParentId")
+                entity.HasIndex(e => e.Id, "AK_Parent_ParentId")
                     .IsUnique();
 
-                entity.Property(e => e.ParentId).HasDefaultValueSql("(newid())");
-                entity.Property(e => e.Id).HasColumnName("Id").ValueGeneratedOnAdd();
+                entity.Property(e => e.Id).HasColumnName("ParentId").HasDefaultValueSql("(newid())");
             });
 
             OnModelCreatingPartial(modelBuilder);
